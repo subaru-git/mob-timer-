@@ -1,3 +1,3 @@
 export const collectionName = {
-  products: 'products',
+  rooms: 'rooms',
 } as const;

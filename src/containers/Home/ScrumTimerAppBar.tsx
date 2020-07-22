@@ -39,7 +39,7 @@ const ScrumTimerAppBar: FC<{ handleDrawerOpen: () => void }> = ({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            ScrumTimer
+            Mob Timer
           </Typography>
         </Toolbar>
       </AppBar>

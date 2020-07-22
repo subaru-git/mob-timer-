@@ -21,11 +21,6 @@ const useStyles = makeStyles(() =>
       alignSelf: 'center',
       marginRight: '32px',
     },
-    subTimers: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-    },
     loadingMain: {
       display: 'flex',
       height: '80vh',
@@ -39,40 +34,25 @@ const useStyles = makeStyles(() =>
 const ScrumTimerMain: FC = () => {
   const classes = useStyles();
   const { product } = useContext(ProductContext);
-  const begin = toToday(moment(product?.beginTime));
-  const daily = toToday(moment(product?.dailyScrumBeginTime));
-  const end = toToday(moment(product?.endTime));
-  const send = getSprintEndDate(
-    moment(product?.beginDate).toDate(),
-    product ? product.sprintTerm : 1,
-    moment().toDate(),
-    moment(product?.beginTime).toDate(),
-    moment(product?.endTime).toDate(),
-  );
-  const events = getEvents(begin, end, daily, moment());
-  const findIndex = events.findIndex(e => e.date > moment());
-  const activeStep = findIndex === -1 ? events.length : findIndex;
 
   return (
     <>
-      {!product ? (
+      {!true ? (
         <div className={classes.loadingMain}>
           <CircularProgress className={classes.loading} />
         </div>
       ) : (
         <>
           <div className={classes.appMain}>
-            <ScrumTimerDailyStepper events={events} activeStep={activeStep} />
             <div className={classes.mainTimer}>
               <ScrumTimerCountdown
-                end={end.toDate()}
-                title="end working"
+                end={moment()
+                  .add(10, 'm')
+                  .toDate()}
+                title="driver is XXX"
                 main
               />
             </div>
-          </div>
-          <div className={classes.subTimers}>
-            <ScrumTimerCountdown end={send} title="sprint end" />
           </div>
         </>
       )}

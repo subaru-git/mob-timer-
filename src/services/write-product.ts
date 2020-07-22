@@ -9,7 +9,7 @@ const writeProduct = async (
   console.log(product);
   const batch = db.batch();
   const doc = await db
-    .collection(collectionName.products)
+    .collection(collectionName.rooms)
     .doc(product.id)
     .get();
   if (doc.exists) {

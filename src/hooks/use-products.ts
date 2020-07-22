@@ -15,7 +15,7 @@ const useProducts = () => {
   useEffect(() => {
     const { db } = firebaseRef.current;
     if (!db) throw new Error('Firestore is not initialized');
-    const query = db.collection(collectionName.products);
+    const query = db.collection(collectionName.rooms);
     const load = async () => {
       setLoading(true);
       try {
@@ -27,8 +27,11 @@ const useProducts = () => {
         setProducts(data);
         productRef.current.setProduct(data[0]);
         setError(null);
+        console.log(`firebase done`);
+        console.log(data);
       } catch (e) {
         setError(e);
+        console.log(`firebase error`);
       }
       setLoading(false);
     };
