@@ -7,6 +7,7 @@ export type Product = {
   breaks: number;
   breaksCount: number;
   members: string[];
+  timerEnd: firestore.Timestamp | null;
   createdAt: firestore.Timestamp | null;
   updatedAt: firestore.Timestamp | null;
 };

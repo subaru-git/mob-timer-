@@ -1,11 +1,12 @@
 import React, { FC, useContext } from 'react';
 import moment from 'moment';
+import firebase from 'firebase/app';
 
 import ScrumTimerCountdown from 'components/Home/ScrumTimerCountdown';
-import ScrumTimerDailyStepper from 'components/Home/ScrumTimerDailyStepper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
+
 import { ProductContext } from 'contexts';
-import { getSprintEndDate, toToday, getEvents } from 'utils/SprintCalculator';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -33,30 +34,61 @@ const useStyles = makeStyles(() =>
 
 const ScrumTimerMain: FC = () => {
   const classes = useStyles();
-  const { product } = useContext(ProductContext);
+  const { product, setProduct } = useContext(ProductContext);
+  if (!product) {
+    return (
+      <div className={classes.loadingMain}>
+        <CircularProgress className={classes.loading} />
+      </div>
+    );
+  }
+  const isNull = (t: any): t is null => t == null;
+  const maintimer = isNull(product.timerEnd) ? (
+    <span>Please Start Next Timer</span>
+  ) : (
+    <ScrumTimerCountdown
+      end={product.timerEnd.toDate()}
+      title="driver is XXX"
+      main
+    />
+  );
+  const handleStart = () => {
+    if (product) {
+      const timerEnd = firebase.firestore.Timestamp.fromDate(
+        moment()
+          .add(product?.timer, 'm')
+          .toDate(),
+      );
+      setProduct({ ...product, timerEnd });
+    }
+  };
+
+  const handleStop = () => {
+    if (product) {
+      setProduct({ ...product, timerEnd: null });
+    }
+  };
 
   return (
-    <>
-      {!true ? (
-        <div className={classes.loadingMain}>
-          <CircularProgress className={classes.loading} />
-        </div>
-      ) : (
-        <>
-          <div className={classes.appMain}>
-            <div className={classes.mainTimer}>
-              <ScrumTimerCountdown
-                end={moment()
-                  .add(10, 'm')
-                  .toDate()}
-                title="driver is XXX"
-                main
-              />
-            </div>
-          </div>
-        </>
-      )}
-    </>
+    <div className={classes.appMain}>
+      <div className={classes.mainTimer}>{maintimer}</div>
+      <Button
+        variant="contained"
+        onClick={() => {
+          handleStart();
+        }}
+      >
+        Start
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          handleStop();
+        }}
+      >
+        Stop
+      </Button>
+    </div>
   );
 };
 

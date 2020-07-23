@@ -35,14 +35,12 @@ const ScrumTimerCountdown: FC<ScrumTimerCountdownProp> = ({
     <div className={classes.countdown}>
       <Countdown
         date={end}
-        renderer={({ days, hours, minutes, seconds, completed }) => {
+        renderer={({ minutes, seconds, completed }) => {
           if (completed) {
             return <span>Time is over!!</span>;
           }
-          const text = `${days} days ${zeroPad(hours)} : ${zeroPad(
-            minutes,
-          )} : ${zeroPad(seconds)}`;
-          const speed = text.length - 1;
+          const text = `${zeroPad(minutes)} : ${zeroPad(seconds)}`;
+          const speed = text.length;
 
           return (
             <div className={main ? classes.main : classes.sub}>

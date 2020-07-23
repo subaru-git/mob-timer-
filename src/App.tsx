@@ -4,7 +4,7 @@ import ScrumTimerDrawer from 'containers/Home/ScrumTimerDrawer';
 import ScrumTimerMain from 'containers/Home/ScrumTimerMain';
 
 const App: FC = () => {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
