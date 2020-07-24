@@ -43,30 +43,29 @@ const ScrumTimerMain: FC = () => {
     );
   }
   const isNull = (t: any): t is null => t == null;
+  const driver = product.members[product.count % product.members.length];
   const maintimer = isNull(product.timerEnd) ? (
-    <span>Please Start Next Timer</span>
+    <span>Please Start Next Timer : driver is {driver}</span>
   ) : (
     <ScrumTimerCountdown
       end={product.timerEnd.toDate()}
-      title="driver is XXX"
-      main
+      title={`driver is ${driver}`}
+      onFinish={() => {
+        setProduct({ ...product, count: product.count + 1 });
+      }}
     />
   );
   const handleStart = () => {
-    if (product) {
-      const timerEnd = firebase.firestore.Timestamp.fromDate(
-        moment()
-          .add(product?.timer, 'm')
-          .toDate(),
-      );
-      setProduct({ ...product, timerEnd });
-    }
+    const timerEnd = firebase.firestore.Timestamp.fromDate(
+      moment()
+        .add(product.timer, 'm')
+        .toDate(),
+    );
+    setProduct({ ...product, timerEnd });
   };
 
   const handleStop = () => {
-    if (product) {
-      setProduct({ ...product, timerEnd: null });
-    }
+    setProduct({ ...product, timerEnd: null });
   };
 
   return (

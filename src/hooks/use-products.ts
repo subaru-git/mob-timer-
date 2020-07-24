@@ -27,6 +27,15 @@ const useProducts = () => {
         setProducts(data);
         productRef.current.setProduct(data[0]);
         setError(null);
+        query.onSnapshot(snapshot => {
+          const updated = snapshot.docs.map(doc => ({
+            ...(doc.data() as Product),
+            id: doc.id,
+          }));
+          setProducts(updated);
+          // productRef.current.setProduct(updated[0]);
+          console.log(`onSnapshot!!! ${snapshot.docChanges()[0]?.type}`);
+        });
         console.log(`firebase done`);
         console.log(data);
       } catch (e) {

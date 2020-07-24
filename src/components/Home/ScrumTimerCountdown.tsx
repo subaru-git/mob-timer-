@@ -21,13 +21,13 @@ const useStyles = makeStyles(() =>
 interface ScrumTimerCountdownProp {
   end: Date;
   title: string;
-  main?: boolean;
+  onFinish?: () => void;
 }
 
 const ScrumTimerCountdown: FC<ScrumTimerCountdownProp> = ({
   end,
   title,
-  main,
+  onFinish,
 }) => {
   const classes = useStyles();
 
@@ -43,17 +43,16 @@ const ScrumTimerCountdown: FC<ScrumTimerCountdownProp> = ({
           const speed = text.length;
 
           return (
-            <div className={main ? classes.main : classes.sub}>
+            <div className={classes.main}>
               <Wave text={text} speed={speed} />
             </div>
           );
         }}
+        onComplete={() => {
+          if (onFinish) onFinish();
+        }}
       />
-      <Typography
-        variant={main ? 'h4' : 'h6'}
-        align="right"
-        color="textSecondary"
-      >
+      <Typography variant="h4" align="right" color="textSecondary">
         {title}
       </Typography>
     </div>
