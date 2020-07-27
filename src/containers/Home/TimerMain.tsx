@@ -6,8 +6,8 @@ import CountdownTimer from 'components/Home/CountdownTimer';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
-import writeProduct from 'services/write-product';
-import { FirebaseContext, ProductContext } from 'contexts';
+import writeRoom from 'services/write-room';
+import { FirebaseContext, RoomContext } from 'contexts';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -36,8 +36,8 @@ const useStyles = makeStyles(() =>
 const ScrumTimerMain: FC = () => {
   const classes = useStyles();
   const { db } = useContext(FirebaseContext);
-  const { product } = useContext(ProductContext);
-  if (!product) {
+  const { room } = useContext(RoomContext);
+  if (!room) {
     return (
       <div className={classes.loadingMain}>
         <CircularProgress className={classes.loading} />
@@ -45,29 +45,29 @@ const ScrumTimerMain: FC = () => {
     );
   }
   const isNull = (t: any): t is null => t == null;
-  const driver = product.members[product.count % product.members.length];
-  const maintimer = isNull(product.timerEnd) ? (
+  const driver = room.members[room.count % room.members.length];
+  const maintimer = isNull(room.timerEnd) ? (
     <span>Please Start Next Timer : driver is {driver}</span>
   ) : (
     <CountdownTimer
-      end={product.timerEnd.toDate()}
+      end={room.timerEnd.toDate()}
       title={`driver is ${driver}`}
       onFinish={() => {
-        if (db) writeProduct(db, { ...product, count: product.count + 1 });
+        if (db) writeRoom(db, { ...room, count: room.count + 1 });
       }}
     />
   );
   const handleStart = () => {
     const timerEnd = firebase.firestore.Timestamp.fromDate(
       moment()
-        .add(product.timer, 'm')
+        .add(room.timer, 'm')
         .toDate(),
     );
-    if (db) writeProduct(db, { ...product, timerEnd });
+    if (db) writeRoom(db, { ...room, timerEnd });
   };
 
   const handleStop = () => {
-    if (db) writeProduct(db, { ...product, timerEnd: null });
+    if (db) writeRoom(db, { ...room, timerEnd: null });
   };
 
   return (

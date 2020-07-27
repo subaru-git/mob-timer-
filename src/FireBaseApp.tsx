@@ -3,23 +3,23 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-import { initialProduct } from 'services/models/product';
+import { initialRoom } from 'services/models/room';
 import initializeRooms from 'hooks/initialize-rooms';
-import { FirebaseContext, ProductContext } from 'contexts';
+import { FirebaseContext, RoomContext } from 'contexts';
 
 const FirebaseApp: FC = ({ children }) => {
   const db = firebase.firestore();
   const [loading, setLoading] = useState(false);
-  const [product, setProduct] = useState(initialProduct);
+  const [room, setRoom] = useState(initialRoom);
   useEffect(() => {
-    initializeRooms(db, setProduct, setLoading);
+    initializeRooms(db, setRoom, setLoading);
   }, []);
 
   return (
     <FirebaseContext.Provider value={{ db }}>
-      <ProductContext.Provider value={{ product, setProduct, loading }}>
+      <RoomContext.Provider value={{ room, setRoom, loading }}>
         {children}
-      </ProductContext.Provider>
+      </RoomContext.Provider>
     </FirebaseContext.Provider>
   );
 };

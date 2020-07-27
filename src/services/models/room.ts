@@ -1,6 +1,6 @@
 import { firestore } from 'firebase/app';
 
-export type Product = {
+export type Room = {
   id?: string;
   name: string;
   timer: number;
@@ -13,7 +13,7 @@ export type Product = {
   updatedAt: firestore.Timestamp | null;
 };
 
-export const initialProduct: Product = {
+export const initialRoom: Room = {
   name: '',
   timer: 15,
   breaks: 15,

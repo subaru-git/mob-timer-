@@ -1,25 +1,20 @@
 import firebase from 'firebase/app';
-
 import { createContext } from 'react';
 
-import { Product } from 'services/models/product';
+import { Room } from 'services/models/room';
 
-type FirebaseContextValue = {
+export const FirebaseContext = createContext<{
   db: firebase.firestore.Firestore | null;
-};
-
-export const FirebaseContext = createContext<FirebaseContextValue>({
+}>({
   db: null,
 });
 
-type ProductContextValue = {
-  product: Product | null;
-  setProduct: (product: Product) => void;
+export const RoomContext = createContext<{
+  room: Room | null;
+  setRoom: (room: Room) => void;
   loading: boolean;
-};
-
-export const ProductContext = createContext<ProductContextValue>({
-  product: null,
-  setProduct: () => undefined,
+}>({
+  room: null,
+  setRoom: () => undefined,
   loading: false,
 });
