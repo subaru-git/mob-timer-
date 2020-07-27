@@ -1,25 +1,25 @@
 import React, { FC, useState } from 'react';
-import ScrumTimerAppBar from 'containers/Home/ScrumTimerAppBar';
-import ScrumTimerDrawer from 'containers/Home/ScrumTimerDrawer';
-import ScrumTimerMain from 'containers/Home/ScrumTimerMain';
+import TimerAppBar from 'containers/Home/TimerAppBar';
+import TimerDrawer from 'containers/Home/TimerDrawer';
+import TimerMain from 'containers/Home/TimerMain';
 
 const App: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>
-      <ScrumTimerAppBar
+      <TimerAppBar
         handleDrawerOpen={() => {
           setOpen(true);
         }}
       />
-      <ScrumTimerDrawer
+      <TimerDrawer
         handleDrawerClose={() => {
           setOpen(false);
         }}
         open={open}
       />
-      <ScrumTimerMain />
+      <TimerMain />
     </>
   );
 };

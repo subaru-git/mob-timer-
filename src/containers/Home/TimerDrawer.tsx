@@ -1,6 +1,6 @@
 import 'date-fns';
 import React, { FC, useContext } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -8,7 +8,7 @@ import DrawerHeader from 'components/Drawer/DrawerHeader';
 import MobSetting from 'components/Drawer/MobSetting';
 import { ProductContext } from 'contexts';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',

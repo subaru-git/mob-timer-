@@ -3,8 +3,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-import writeProduct from 'services/write-product';
-import { Product, initialProduct } from 'services/models/product';
+import { initialProduct } from 'services/models/product';
 import initializeRooms from 'hooks/initialize-rooms';
 import { FirebaseContext, ProductContext } from 'contexts';
 

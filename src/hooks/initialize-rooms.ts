@@ -1,9 +1,7 @@
-import { useContext, useEffect, useRef, useState } from 'react';
 import firebase from 'firebase/app';
 
 import { Product } from 'services/models/product';
 import { collectionName } from 'services/constants';
-import { FirebaseContext, ProductContext } from 'contexts';
 
 const initializeRooms = (
   db: firebase.firestore.Firestore,
@@ -29,8 +27,6 @@ const initializeRooms = (
         setProduct(updated[0]);
         console.log(`onSnapshot!!! ${snapshot.docChanges()[0]?.type}`);
       });
-      console.log(`firebase done`);
-      console.log(data);
     } catch (e) {
       console.log(`firebase error`);
     }

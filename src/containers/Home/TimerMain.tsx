@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import moment from 'moment';
 import firebase from 'firebase/app';
 
-import ScrumTimerCountdown from 'components/Home/ScrumTimerCountdown';
+import CountdownTimer from 'components/Home/CountdownTimer';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
@@ -49,7 +49,7 @@ const ScrumTimerMain: FC = () => {
   const maintimer = isNull(product.timerEnd) ? (
     <span>Please Start Next Timer : driver is {driver}</span>
   ) : (
-    <ScrumTimerCountdown
+    <CountdownTimer
       end={product.timerEnd.toDate()}
       title={`driver is ${driver}`}
       onFinish={() => {

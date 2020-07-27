@@ -5,7 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
 
-import ScrumTimerSlider from 'components/common/ScrumTimerSlider';
+import TimerSlider from 'components/common/TimerSlider';
 import { ProductContext, FirebaseContext } from 'contexts';
 import writeProduct from 'services/write-product';
 
@@ -14,9 +14,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
-      margin: '16px',
-    },
-    dailyScrum: {
       margin: '16px',
     },
     slider: {
@@ -50,7 +47,6 @@ const MobSetting: FC = () => {
     }
   };
   const handleDelete = (i: number) => {
-    console.log(`${members[i]} chip is deleted`);
     members.splice(i, 1);
     if (product) {
       if (db) writeProduct(db, { ...product, members });
@@ -59,7 +55,6 @@ const MobSetting: FC = () => {
   const handleKeyDown = (e: any) => {
     if (e.keyCode === 13) {
       const nm = e.target.value;
-      console.log(nm);
       members.push(nm);
       if (product) {
         if (db) writeProduct(db, { ...product, members });
@@ -73,7 +68,7 @@ const MobSetting: FC = () => {
       <Typography variant="subtitle2">Mobbing Setting</Typography>
       <div className={classes.slider}>
         <InputLabel shrink>Timer</InputLabel>
-        <ScrumTimerSlider
+        <TimerSlider
           value={timer}
           step={5}
           min={5}
@@ -85,7 +80,7 @@ const MobSetting: FC = () => {
           }}
         />
         <InputLabel shrink>Breaks</InputLabel>
-        <ScrumTimerSlider
+        <TimerSlider
           value={breaks}
           step={5}
           min={5}

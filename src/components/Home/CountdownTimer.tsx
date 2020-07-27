@@ -18,17 +18,11 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-interface ScrumTimerCountdownProp {
+const CountdownTimer: FC<{
   end: Date;
   title: string;
   onFinish?: () => void;
-}
-
-const ScrumTimerCountdown: FC<ScrumTimerCountdownProp> = ({
-  end,
-  title,
-  onFinish,
-}) => {
+}> = ({ end, title, onFinish }) => {
   const classes = useStyles();
 
   return (
@@ -59,4 +53,4 @@ const ScrumTimerCountdown: FC<ScrumTimerCountdownProp> = ({
   );
 };
 
-export default ScrumTimerCountdown;
+export default CountdownTimer;
