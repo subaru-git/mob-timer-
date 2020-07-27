@@ -6,7 +6,8 @@ import ScrumTimerCountdown from 'components/Home/ScrumTimerCountdown';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 
-import { ProductContext } from 'contexts';
+import writeProduct from 'services/write-product';
+import { FirebaseContext, ProductContext } from 'contexts';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -34,7 +35,8 @@ const useStyles = makeStyles(() =>
 
 const ScrumTimerMain: FC = () => {
   const classes = useStyles();
-  const { product, setProduct } = useContext(ProductContext);
+  const { db } = useContext(FirebaseContext);
+  const { product } = useContext(ProductContext);
   if (!product) {
     return (
       <div className={classes.loadingMain}>
@@ -51,7 +53,7 @@ const ScrumTimerMain: FC = () => {
       end={product.timerEnd.toDate()}
       title={`driver is ${driver}`}
       onFinish={() => {
-        setProduct({ ...product, count: product.count + 1 });
+        if (db) writeProduct(db, { ...product, count: product.count + 1 });
       }}
     />
   );
@@ -61,11 +63,11 @@ const ScrumTimerMain: FC = () => {
         .add(product.timer, 'm')
         .toDate(),
     );
-    setProduct({ ...product, timerEnd });
+    if (db) writeProduct(db, { ...product, timerEnd });
   };
 
   const handleStop = () => {
-    setProduct({ ...product, timerEnd: null });
+    if (db) writeProduct(db, { ...product, timerEnd: null });
   };
 
   return (

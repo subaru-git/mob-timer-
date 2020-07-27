@@ -6,7 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
 
 import ScrumTimerSlider from 'components/common/ScrumTimerSlider';
-import { ProductContext } from 'contexts';
+import { ProductContext, FirebaseContext } from 'contexts';
+import writeProduct from 'services/write-product';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
@@ -27,31 +28,32 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MobSetting: FC = () => {
   const classes = useStyles();
-  const { product, setProduct } = useContext(ProductContext);
+  const { db } = useContext(FirebaseContext);
+  const { product } = useContext(ProductContext);
   const members = product ? product.members : [];
   const timer = product ? product.timer : 15;
   const breaks = product ? product.breaks : 15;
   const breaksCount = product ? product.breaksCount : 5;
   const handleTimerChange = (value: number) => {
     if (product) {
-      setProduct({ ...product, timer: value });
+      if (db) writeProduct(db, { ...product, timer: value });
     }
   };
   const handleBreaksChange = (value: number) => {
     if (product) {
-      setProduct({ ...product, breaks: value });
+      if (db) writeProduct(db, { ...product, breaks: value });
     }
   };
   const handleBreaksCountChange = (e: any) => {
     if (product) {
-      setProduct({ ...product, breaksCount: e.target.value });
+      if (db) writeProduct(db, { ...product, breaksCount: e.target.value });
     }
   };
   const handleDelete = (i: number) => {
     console.log(`${members[i]} chip is deleted`);
     members.splice(i, 1);
     if (product) {
-      setProduct({ ...product, members });
+      if (db) writeProduct(db, { ...product, members });
     }
   };
   const handleKeyDown = (e: any) => {
@@ -60,7 +62,7 @@ const MobSetting: FC = () => {
       console.log(nm);
       members.push(nm);
       if (product) {
-        setProduct({ ...product, members });
+        if (db) writeProduct(db, { ...product, members });
       }
       e.target.value = '';
     }
@@ -96,7 +98,7 @@ const MobSetting: FC = () => {
         />
         <InputLabel shrink>Breaks Count</InputLabel>
         <TextField
-          defaultValue={breaksCount}
+          value={breaksCount}
           type="number"
           onChange={(e: object) => {
             handleBreaksCountChange(e);

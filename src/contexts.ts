@@ -15,9 +15,11 @@ export const FirebaseContext = createContext<FirebaseContextValue>({
 type ProductContextValue = {
   product: Product | null;
   setProduct: (product: Product) => void;
+  loading: boolean;
 };
 
 export const ProductContext = createContext<ProductContextValue>({
   product: null,
   setProduct: () => undefined,
+  loading: false,
 });

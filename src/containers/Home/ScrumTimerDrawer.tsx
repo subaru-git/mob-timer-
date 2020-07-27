@@ -6,7 +6,6 @@ import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DrawerHeader from 'components/Drawer/DrawerHeader';
 import MobSetting from 'components/Drawer/MobSetting';
-import useProducts from 'hooks/use-products';
 import { ProductContext } from 'contexts';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,8 +31,7 @@ const ScrumTimerDrawer: FC<{
   open: boolean;
 }> = ({ handleDrawerClose, open }) => {
   const classes = useStyles();
-  const { loading } = useProducts();
-  const { product, setProduct } = useContext(ProductContext);
+  const { product, loading } = useContext(ProductContext);
 
   return (
     <div className={classes.root}>
