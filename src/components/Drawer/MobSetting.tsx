@@ -7,7 +7,7 @@ import Chip from '@material-ui/core/Chip';
 
 import TimerSlider from 'components/common/TimerSlider';
 import { RoomContext, FirebaseContext } from 'contexts';
-import writeRoom from 'services/write-room';
+import { writeRoom } from 'services/write-room';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 

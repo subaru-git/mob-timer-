@@ -17,4 +17,11 @@ const writeRoom = async (db: firebase.firestore.Firestore, room: Room) => {
   await batch.commit();
 };
 
-export default writeRoom;
+const createRoom = async (db: firebase.firestore.Firestore, room: Room) => {
+  await db
+    .collection(collectionName.rooms)
+    .doc(room.id)
+    .set(room);
+};
+
+export { writeRoom, createRoom };

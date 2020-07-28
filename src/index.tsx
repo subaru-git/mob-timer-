@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 
+import TimerTop from 'containers/Top/TimerTop';
 import App from './App';
 import FirebaseApp from './FireBaseApp';
 import firebaseConfig from './firebase-config';
@@ -13,7 +15,12 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <FirebaseApp>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/:name" component={App} />
+        <Route path="/" component={TimerTop} />
+      </Switch>
+    </Router>
   </FirebaseApp>,
   document.getElementById('root'),
 );

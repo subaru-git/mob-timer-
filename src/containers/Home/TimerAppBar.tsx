@@ -20,24 +20,29 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ScrumTimerAppBar: FC<{ handleDrawerOpen: () => void }> = ({
-  handleDrawerOpen,
-}) => {
+const ScrumTimerAppBar: FC<{
+  handleDrawerOpen?: () => void;
+  menu?: boolean;
+}> = ({ handleDrawerOpen = () => {}, menu = true }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={handleDrawerOpen}
-          >
-            <MenuIcon />
-          </IconButton>
+          {menu ? (
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <div />
+          )}
           <Typography variant="h6" className={classes.title}>
             Mob Timer
           </Typography>

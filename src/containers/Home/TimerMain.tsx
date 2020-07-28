@@ -10,7 +10,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
-import writeRoom from 'services/write-room';
+import { writeRoom } from 'services/write-room';
 import { FirebaseContext, RoomContext } from 'contexts';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
