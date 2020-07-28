@@ -7,6 +7,7 @@ export type Room = {
   breaks: number;
   breaksCount: number;
   count: number;
+  current: number;
   members: string[];
   timerEnd: firestore.Timestamp | null;
   createdAt: firestore.Timestamp | null;
@@ -19,6 +20,7 @@ export const initialRoom: Room = {
   breaks: 15,
   breaksCount: 5,
   count: 0,
+  current: 0,
   members: [],
   timerEnd: null,
   createdAt: null,

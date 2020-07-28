@@ -2,14 +2,19 @@ import React, { FC, useContext } from 'react';
 import moment from 'moment';
 import firebase from 'firebase/app';
 
-import CountdownTimer from 'components/Home/CountdownTimer';
+import TimerControl from 'components/Home/TimerControl';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
 
 import writeRoom from 'services/write-room';
 import { FirebaseContext, RoomContext } from 'contexts';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,6 +35,10 @@ const useStyles = makeStyles(() =>
     loading: {
       margin: 'auto',
     },
+    list: {
+      width: '100%',
+      maxWidth: '360px',
+    },
   }),
 );
 
@@ -44,23 +53,30 @@ const ScrumTimerMain: FC = () => {
       </div>
     );
   }
-  const isNull = (t: any): t is null => t == null;
-  const driver = room.members[room.count % room.members.length];
-  const maintimer = isNull(room.timerEnd) ? (
-    <span>Please Start Next Timer : driver is {driver}</span>
-  ) : (
-    <CountdownTimer
-      end={room.timerEnd.toDate()}
-      title={`driver is ${driver}`}
-      onFinish={() => {
-        if (db) writeRoom(db, { ...room, count: room.count + 1 });
-      }}
-    />
-  );
+  const driver = room.members[room.current];
+  const isBreak = room.count === room.breaksCount;
+  const handleFinish = () => {
+    if (db) {
+      let newCurrent = room.current;
+      let newCount = 0;
+      if (!isBreak) {
+        newCurrent = (room.current + 1) % room.members.length;
+        newCount = room.count + 1;
+      }
+      writeRoom(db, {
+        ...room,
+        count: newCount,
+        current: newCurrent,
+        timerEnd: null,
+      });
+    }
+  };
   const handleStart = () => {
+    let time = room.timer;
+    if (isBreak) time = room.breaks;
     const timerEnd = firebase.firestore.Timestamp.fromDate(
       moment()
-        .add(room.timer, 'm')
+        .add(time, 'm')
         .toDate(),
     );
     if (db) writeRoom(db, { ...room, timerEnd });
@@ -70,26 +86,46 @@ const ScrumTimerMain: FC = () => {
     if (db) writeRoom(db, { ...room, timerEnd: null });
   };
 
+  const handleSkip = () => {
+    if (db)
+      writeRoom(db, {
+        ...room,
+        timerEnd: null,
+        current: (room.current + 1) % room.members.length,
+      });
+  };
+
   return (
-    <div className={classes.appMain}>
-      <div className={classes.mainTimer}>{maintimer}</div>
-      <Button
-        variant="contained"
-        onClick={() => {
-          handleStart();
-        }}
-      >
-        Start
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => {
-          handleStop();
-        }}
-      >
-        Stop
-      </Button>
-    </div>
+    <>
+      <LinearProgress
+        variant="determinate"
+        color="secondary"
+        value={(room.count * 100) / room.breaksCount}
+      />
+      <div className={classes.appMain}>
+        <TimerControl
+          end={room.timerEnd}
+          driver={driver}
+          onFinish={handleFinish}
+          onStart={handleStart}
+          onStop={handleStop}
+          onSkip={handleSkip}
+          isBreak={isBreak}
+        />
+        <List className={classes.list} component="nav" aria-label="contacts">
+          {room.members.map((m: string, i: number) => (
+            <ListItem key={m}>
+              {room.current === i && (
+                <ListItemIcon>
+                  <DriveEtaIcon />
+                </ListItemIcon>
+              )}
+              <ListItemText inset={room.current !== i} primary={m} />
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    </>
   );
 };
 

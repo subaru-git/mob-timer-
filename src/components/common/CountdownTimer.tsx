@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Wave } from 'react-animated-text';
 import Countdown, { zeroPad } from 'react-countdown';
-import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,19 +19,15 @@ const useStyles = makeStyles(() =>
 
 const CountdownTimer: FC<{
   end: Date;
-  title: string;
   onFinish?: () => void;
-}> = ({ end, title, onFinish }) => {
+}> = ({ end, onFinish }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.countdown}>
       <Countdown
         date={end}
-        renderer={({ minutes, seconds, completed }) => {
-          if (completed) {
-            return <span>Time is over!!</span>;
-          }
+        renderer={({ minutes, seconds }) => {
           const text = `${zeroPad(minutes)} : ${zeroPad(seconds)}`;
           const speed = text.length;
 
@@ -46,9 +41,6 @@ const CountdownTimer: FC<{
           if (onFinish) onFinish();
         }}
       />
-      <Typography variant="h4" align="right" color="textSecondary">
-        {title}
-      </Typography>
     </div>
   );
 };
