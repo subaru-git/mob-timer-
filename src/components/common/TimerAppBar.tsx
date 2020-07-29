@@ -51,22 +51,26 @@ const TimerAppBar: FC<{
           <Typography variant="h6" className={classes.title}>
             Mob Timer
           </Typography>
-          <Tooltip
-            title={tooltip}
-            onClose={e => {
-              setTooltip('');
-            }}
-          >
-            <CopyToClipboard text={window.location.href}>
-              <IconButton
-                onClick={() => {
-                  setTooltip('URL copied!!');
-                }}
-              >
-                <PersonAddIcon color="inherit" />
-              </IconButton>
-            </CopyToClipboard>
-          </Tooltip>
+          {menu ? (
+            <Tooltip
+              title={tooltip}
+              onClose={e => {
+                setTooltip('');
+              }}
+            >
+              <CopyToClipboard text={window.location.href}>
+                <IconButton
+                  onClick={() => {
+                    setTooltip('URL copied!!');
+                  }}
+                >
+                  <PersonAddIcon color="inherit" />
+                </IconButton>
+              </CopyToClipboard>
+            </Tooltip>
+          ) : (
+            <div />
+          )}
         </Toolbar>
       </AppBar>
     </div>
