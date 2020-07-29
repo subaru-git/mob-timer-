@@ -12,6 +12,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import CasinoIcon from '@material-ui/icons/Casino';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
+import { shuffle } from 'utils/util';
+
 const useStyles = makeStyles(() =>
   createStyles({
     addMembers: {
@@ -30,15 +32,6 @@ const useStyles = makeStyles(() =>
     },
   }),
 );
-
-const shuffle = ([...arr]) => {
-  let m = arr.length;
-  while (m) {
-    const i = Math.floor(Math.random() * m--);
-    [arr[m], arr[i]] = [arr[i], arr[m]];
-  }
-  return arr;
-};
 
 const MembersSetting: FC<{
   members: string[];

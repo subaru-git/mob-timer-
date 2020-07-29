@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import { isNull } from 'utils/util';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
@@ -52,7 +53,6 @@ const TimerControl: FC<{
   isBreak: boolean;
 }> = ({ end, driver, onFinish, onStart, onStop, onSkip, isBreak }) => {
   const classes = useStyles();
-  const isNull = (t: any): t is null => t == null;
   const maintimer = isNull(end) ? (
     <div className={classes.stop}>
       {isBreak ? (
