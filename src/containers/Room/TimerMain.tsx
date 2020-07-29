@@ -2,8 +2,8 @@ import React, { FC, useContext } from 'react';
 import moment from 'moment';
 import firebase from 'firebase/app';
 
-import { TimerControl } from 'components/Home/TimerControl';
-import { MembersList } from 'components/Home/MembersList';
+import { TimerControl } from 'components/Room/TimerControl';
+import { MembersList } from 'components/Room/MembersList';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';

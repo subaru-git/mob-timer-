@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import { TimerAppBar } from 'components/common/TimerAppBar';
-import { TimerDrawer } from 'containers/Home/TimerDrawer';
-import { TimerMain } from 'containers/Home/TimerMain';
-import { RoomApp } from 'containers/Home/RoomApp';
+import { TimerDrawer } from 'containers/Room/TimerDrawer';
+import { TimerMain } from 'containers/Room/TimerMain';
+import { RoomApp } from 'containers/Room/RoomApp';
 
 const TimerRoom: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
