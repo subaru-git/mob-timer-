@@ -14,11 +14,13 @@ const useStyles = makeStyles(() =>
       display: 'flex',
     },
     drawer: {
-      width: '80%',
+      width: '50%',
+      minWidth: '350px',
       flexShrink: 0,
     },
     drawerPaper: {
-      width: '80%',
+      width: '50%',
+      minWidth: '350px',
     },
     loading: {
       margin: 'auto',

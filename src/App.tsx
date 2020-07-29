@@ -5,7 +5,7 @@ import TimerMain from 'containers/Home/TimerMain';
 import RoomApp from 'containers/Home/RoomApp';
 
 const App: FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
 
   return (
     <RoomApp>

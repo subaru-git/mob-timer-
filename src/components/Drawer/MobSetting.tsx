@@ -1,11 +1,12 @@
 import React, { FC, useContext } from 'react';
+import ArrayMove from 'array-move';
 
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import Chip from '@material-ui/core/Chip';
 
 import TimerSlider from 'components/common/TimerSlider';
+import MembersSetting from 'components/Drawer/MembersSetting';
 import { RoomContext, FirebaseContext } from 'contexts';
 import { writeRoom } from 'services/write-room';
 
@@ -20,13 +21,23 @@ const useStyles = makeStyles(() =>
       marginTop: '16px',
       width: '300px',
     },
+    addMembers: {
+      marginTop: '16px',
+    },
+    membersLabel: {
+      marginTop: '16px',
+    },
+    members: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
   }),
 );
 
 const MobSetting: FC = () => {
   const classes = useStyles();
   const { db } = useContext(FirebaseContext);
-  const { room } = useContext(RoomContext);
+  const { room, setRoom } = useContext(RoomContext);
   const members = room ? room.members : [];
   const timer = room ? room.timer : 15;
   const breaks = room ? room.breaks : 15;
@@ -46,12 +57,6 @@ const MobSetting: FC = () => {
       if (db) writeRoom(db, { ...room, breaksCount: e.target.value });
     }
   };
-  const handleDelete = (i: number) => {
-    members.splice(i, 1);
-    if (room) {
-      if (db) writeRoom(db, { ...room, members });
-    }
-  };
   const handleKeyDown = (e: any) => {
     if (e.keyCode === 13) {
       const nm = e.target.value;
@@ -60,6 +65,22 @@ const MobSetting: FC = () => {
         if (db) writeRoom(db, { ...room, members });
       }
       e.target.value = '';
+    }
+  };
+  const handleDelete = (i: number) => {
+    members.splice(i, 1);
+    if (room) {
+      if (db) writeRoom(db, { ...room, members });
+    }
+  };
+  const handleDrop = (removedIndex: number, addedIndex: number) => {
+    const newMembers = ArrayMove(members, removedIndex, addedIndex);
+    if (room) {
+      if (db) {
+        writeRoom(db, { ...room, members: newMembers });
+        // if you wait "snapshot", List is blinked.
+        setRoom({ ...room, members: newMembers });
+      }
     }
   };
 
@@ -99,23 +120,12 @@ const MobSetting: FC = () => {
             handleBreaksCountChange(e);
           }}
         />
-        <InputLabel shrink>Add Members</InputLabel>
-        <TextField
-          label="member"
-          onKeyDown={e => {
-            handleKeyDown(e);
-          }}
+        <MembersSetting
+          members={members}
+          onKeyDown={handleKeyDown}
+          onDelete={handleDelete}
+          onDrop={handleDrop}
         />
-        <InputLabel shrink>Members</InputLabel>
-        {members.map((m, i) => (
-          <Chip
-            key={m}
-            label={m}
-            onDelete={() => {
-              handleDelete(i);
-            }}
-          />
-        ))}
       </div>
     </div>
   );
