@@ -110,27 +110,31 @@ const TimerControl: FC<{
     <div className={classes.root}>
       <div className={classes.mainTimer}>{maintimer}</div>
       <div className={classes.buttons}>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          color="primary"
-          endIcon={<PlayCircleOutlineIcon />}
-          onClick={() => {
-            onStart();
-          }}
-        >
-          Start
-        </Button>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          endIcon={<StopIcon />}
-          onClick={() => {
-            onStop();
-          }}
-        >
-          Stop
-        </Button>
+        {isNull(end) ? (
+          <Button
+            className={classes.button}
+            variant="outlined"
+            color="primary"
+            endIcon={<PlayCircleOutlineIcon />}
+            onClick={() => {
+              onStart();
+            }}
+          >
+            Start
+          </Button>
+        ) : (
+          <Button
+            className={classes.button}
+            variant="outlined"
+            color="primary"
+            endIcon={<StopIcon />}
+            onClick={() => {
+              onStop();
+            }}
+          >
+            Stop
+          </Button>
+        )}
         <Button
           className={classes.button}
           variant="outlined"
