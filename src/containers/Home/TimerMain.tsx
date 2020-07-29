@@ -3,18 +3,13 @@ import moment from 'moment';
 import firebase from 'firebase/app';
 
 import { TimerControl } from 'components/Home/TimerControl';
+import { MembersList } from 'components/Home/MembersList';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-
 import { writeRoom } from 'services/write-room';
 import { FirebaseContext, RoomContext } from 'contexts';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -35,10 +30,6 @@ const useStyles = makeStyles(() =>
     loading: {
       margin: 'auto',
     },
-    list: {
-      width: '100%',
-      maxWidth: '360px',
-    },
   }),
 );
 
@@ -46,7 +37,6 @@ const TimerMain: FC = () => {
   const classes = useStyles();
   const { db } = useContext(FirebaseContext);
   const { room, loading } = useContext(RoomContext);
-  console.log(`TimerMain loading : ${loading}`);
   if (loading) {
     return (
       <div className={classes.loadingMain}>
@@ -110,18 +100,7 @@ const TimerMain: FC = () => {
           onSkip={handleSkip}
           isBreak={isBreak}
         />
-        <List className={classes.list} component="nav" aria-label="contacts">
-          {room.members.map((m: string, i: number) => (
-            <ListItem key={m}>
-              {room.current === i && (
-                <ListItemIcon>
-                  <DriveEtaIcon />
-                </ListItemIcon>
-              )}
-              <ListItemText inset={room.current !== i} primary={m} />
-            </ListItem>
-          ))}
-        </List>
+        <MembersList members={room.members} current={room.current} />
       </div>
     </>
   );
