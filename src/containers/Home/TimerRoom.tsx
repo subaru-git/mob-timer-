@@ -4,7 +4,7 @@ import TimerDrawer from 'containers/Home/TimerDrawer';
 import TimerMain from 'containers/Home/TimerMain';
 import RoomApp from 'containers/Home/RoomApp';
 
-const App: FC = () => {
+const TimerRoom: FC = () => {
   const [open, setOpen] = useState<boolean>(true);
 
   return (
@@ -25,4 +25,4 @@ const App: FC = () => {
   );
 };
 
-export default App;
+export default TimerRoom;

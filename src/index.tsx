@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 
 import TimerTop from 'containers/Top/TimerTop';
-import App from './App';
+import TimerRoom from './containers/Home/TimerRoom';
 import FirebaseApp from './FireBaseApp';
 import firebaseConfig from './firebase-config';
 import * as serviceWorker from './serviceWorker';
@@ -17,7 +17,7 @@ ReactDOM.render(
   <FirebaseApp>
     <Router>
       <Switch>
-        <Route path="/:name" component={App} />
+        <Route path="/:name" component={TimerRoom} />
         <Route path="/" component={TimerTop} />
       </Switch>
     </Router>

@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DrawerHeader from 'components/Drawer/DrawerHeader';
-import MobSetting from 'components/Drawer/MobSetting';
+import MobSetting from 'containers/Home/MobSetting';
 import { RoomContext } from 'contexts';
 
 const useStyles = makeStyles(() =>
