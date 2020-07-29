@@ -5,6 +5,8 @@ import firebase from 'firebase/app';
 import { TimerControl } from 'components/Home/TimerControl';
 import { MembersList } from 'components/Home/MembersList';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { writeRoom } from 'services/write-room';
 import { FirebaseContext, RoomContext } from 'contexts';
@@ -22,6 +24,13 @@ const useStyles = makeStyles(() =>
     mainTimer: {
       alignSelf: 'center',
       marginRight: '32px',
+    },
+    reset: {
+      marginRight: '20px',
+      display: 'flex',
+    },
+    resetButton: {
+      margin: '0 0 0 auto',
     },
     loadingMain: {
       display: 'flex',
@@ -82,6 +91,14 @@ const TimerMain: FC = () => {
       current: (room.current + 1) % room.members.length,
     });
   };
+  const handleReset = () => {
+    writeRoom(db, {
+      ...room,
+      timerEnd: null,
+      current: 0,
+      count: 0,
+    });
+  };
 
   return (
     <>
@@ -101,6 +118,19 @@ const TimerMain: FC = () => {
           isBreak={isBreak}
         />
         <MembersList members={room.members} current={room.current} />
+      </div>
+      <div className={classes.reset}>
+        <Button
+          className={classes.resetButton}
+          variant="outlined"
+          color="secondary"
+          startIcon={<RotateLeftIcon />}
+          onClick={() => {
+            handleReset();
+          }}
+        >
+          Reset
+        </Button>
       </div>
     </>
   );
