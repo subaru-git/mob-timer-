@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import firebase from 'firebase/app';
 
-import CountdownTimer from 'components/common/CountdownTimer';
+import { CountdownTimer } from 'components/common/CountdownTimer';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
@@ -139,4 +139,4 @@ const TimerControl: FC<{
   );
 };
 
-export default TimerControl;
+export { TimerControl };

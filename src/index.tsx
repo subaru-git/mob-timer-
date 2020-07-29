@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
 
-import TimerTop from 'containers/Top/TimerTop';
-import TimerRoom from './containers/Home/TimerRoom';
-import FirebaseApp from './FireBaseApp';
+import { TimerTop } from 'containers/Top/TimerTop';
+import { TimerRoom } from './containers/Home/TimerRoom';
+import { FirebaseApp } from './FireBaseApp';
 import firebaseConfig from './firebase-config';
 import * as serviceWorker from './serviceWorker';
 

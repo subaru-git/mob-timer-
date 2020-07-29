@@ -99,4 +99,4 @@ const MembersSetting: FC<{
   );
 };
 
-export default MembersSetting;
+export { MembersSetting };

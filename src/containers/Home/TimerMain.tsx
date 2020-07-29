@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import moment from 'moment';
 import firebase from 'firebase/app';
 
-import TimerControl from 'components/Home/TimerControl';
+import { TimerControl } from 'components/Home/TimerControl';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import List from '@material-ui/core/List';
@@ -42,7 +42,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const ScrumTimerMain: FC = () => {
+const TimerMain: FC = () => {
   const classes = useStyles();
   const { db } = useContext(FirebaseContext);
   const { room } = useContext(RoomContext);
@@ -126,4 +126,4 @@ const ScrumTimerMain: FC = () => {
   );
 };
 
-export default ScrumTimerMain;
+export { TimerMain };

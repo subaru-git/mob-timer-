@@ -45,4 +45,4 @@ const CountdownTimer: FC<{
   );
 };
 
-export default CountdownTimer;
+export { CountdownTimer };

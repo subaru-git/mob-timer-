@@ -28,4 +28,4 @@ const DrawerHeader: FC<{ handleClose: () => void }> = ({ handleClose }) => {
   );
 };
 
-export default DrawerHeader;
+export { DrawerHeader };

@@ -5,7 +5,7 @@ import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import Typography from '@material-ui/core/Typography';
 
-const ScrumTimerSlider: FC<{
+const TimerSlider: FC<{
   value: number;
   step: number;
   min: number;
@@ -47,4 +47,4 @@ const ScrumTimerSlider: FC<{
   );
 };
 
-export default ScrumTimerSlider;
+export { TimerSlider };

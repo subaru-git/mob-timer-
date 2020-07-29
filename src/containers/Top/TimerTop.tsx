@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import TimerAppBar from 'containers/Home/TimerAppBar';
+import { TimerAppBar } from 'components/common/TimerAppBar';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
@@ -51,4 +51,4 @@ const TimerTop: FC = () => {
   );
 };
 
-export default TimerTop;
+export { TimerTop };

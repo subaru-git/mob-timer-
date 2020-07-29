@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const ScrumTimerAppBar: FC<{
+const TimerAppBar: FC<{
   handleDrawerOpen?: () => void;
   menu?: boolean;
 }> = ({ handleDrawerOpen = () => {}, menu = true }) => {
@@ -53,4 +53,4 @@ const ScrumTimerAppBar: FC<{
   );
 };
 
-export default ScrumTimerAppBar;
+export { TimerAppBar };

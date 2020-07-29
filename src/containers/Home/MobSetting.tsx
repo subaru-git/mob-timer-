@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 
-import TimerSlider from 'components/common/TimerSlider';
-import MembersSetting from 'components/Drawer/MembersSetting';
+import { TimerSlider } from 'components/common/TimerSlider';
+import { MembersSetting } from 'components/Drawer/MembersSetting';
 import { RoomContext, FirebaseContext } from 'contexts';
 import { writeRoom } from 'services/write-room';
 
@@ -121,4 +121,4 @@ const MobSetting: FC = () => {
   );
 };
 
-export default MobSetting;
+export { MobSetting };

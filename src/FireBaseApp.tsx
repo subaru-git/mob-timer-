@@ -15,4 +15,4 @@ const FirebaseApp: FC = ({ children }) => {
   );
 };
 
-export default FirebaseApp;
+export { FirebaseApp };

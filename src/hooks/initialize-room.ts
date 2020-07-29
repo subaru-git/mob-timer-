@@ -35,4 +35,4 @@ const initializeRoom = (
   load();
 };
 
-export default initializeRoom;
+export { initializeRoom };

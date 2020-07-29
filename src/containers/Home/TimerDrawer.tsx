@@ -4,8 +4,8 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import DrawerHeader from 'components/Drawer/DrawerHeader';
-import MobSetting from 'containers/Home/MobSetting';
+import { DrawerHeader } from 'components/Drawer/DrawerHeader';
+import { MobSetting } from 'containers/Home/MobSetting';
 import { RoomContext } from 'contexts';
 
 const useStyles = makeStyles(() =>
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const ScrumTimerDrawer: FC<{
+const TimerDrawer: FC<{
   handleDrawerClose: () => void;
   open: boolean;
 }> = ({ handleDrawerClose, open }) => {
@@ -57,4 +57,4 @@ const ScrumTimerDrawer: FC<{
   );
 };
 
-export default ScrumTimerDrawer;
+export { TimerDrawer };

@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 import { initialRoom } from 'services/models/room';
-import initializeRoom from 'hooks/initialize-room';
+import { initializeRoom } from 'hooks/initialize-room';
 import { FirebaseContext, RoomContext } from 'contexts';
 import { useParams } from 'react-router-dom';
 
@@ -24,4 +24,4 @@ const RoomApp: FC = ({ children }) => {
   );
 };
 
-export default RoomApp;
+export { RoomApp };
