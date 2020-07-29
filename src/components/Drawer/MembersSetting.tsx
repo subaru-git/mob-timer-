@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
 
-import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
-import Chip from '@material-ui/core/Chip';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ClearIcon from '@material-ui/icons/Clear';
+import CasinoIcon from '@material-ui/icons/Casino';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
@@ -23,17 +22,31 @@ const useStyles = makeStyles(() =>
     },
     members: {
       display: 'flex',
-      flexWrap: 'wrap',
+      justifyContent: 'left',
+      flexWrap: 'nowrap',
+    },
+    membersList: {
+      flexBasis: '200px',
     },
   }),
 );
+
+const shuffle = ([...arr]) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr;
+};
 
 const MembersSetting: FC<{
   members: string[];
   onKeyDown: (e: any) => void;
   onDelete: (index: number) => void;
   onDrop: (removedIndex: number, addedIndex: number) => void;
-}> = ({ members = [], onKeyDown, onDelete, onDrop }) => {
+  onRandom: (newMembers: string[]) => void;
+}> = ({ members = [], onKeyDown, onDelete, onDrop, onRandom }) => {
   const classes = useStyles();
 
   return (
@@ -51,33 +64,44 @@ const MembersSetting: FC<{
       <InputLabel shrink className={classes.membersLabel}>
         Members
       </InputLabel>
-      <List>
-        <Container
-          dragHandleSelector=".drag-handle"
-          lockAxis="y"
-          onDrop={({ removedIndex, addedIndex }) => {
-            if (removedIndex !== null && addedIndex !== null)
-              onDrop(removedIndex, addedIndex);
-          }}
-        >
-          {members.map((m, i) => (
-            <Draggable key={m}>
-              <ListItem className="drag-handle">
-                <ListItemText primary={m} />
-                <ListItemSecondaryAction>
-                  <IconButton
-                    onClick={() => {
-                      onDelete(i);
-                    }}
-                  >
-                    <ClearIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </Draggable>
-          ))}
-        </Container>
-      </List>
+      <div className={classes.members}>
+        <List className={classes.membersList}>
+          <Container
+            dragHandleSelector=".drag-handle"
+            lockAxis="y"
+            onDrop={({ removedIndex, addedIndex }) => {
+              if (removedIndex !== null && addedIndex !== null)
+                onDrop(removedIndex, addedIndex);
+            }}
+          >
+            {members.map((m, i) => (
+              <Draggable key={m}>
+                <ListItem className="drag-handle">
+                  <ListItemText primary={m} />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      onClick={() => {
+                        onDelete(i);
+                      }}
+                    >
+                      <ClearIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </Draggable>
+            ))}
+          </Container>
+        </List>
+        <div>
+          <IconButton
+            onClick={() => {
+              onRandom(shuffle(members));
+            }}
+          >
+            <CasinoIcon />
+          </IconButton>
+        </div>
+      </div>
     </div>
   );
 };

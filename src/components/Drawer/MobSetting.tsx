@@ -78,8 +78,15 @@ const MobSetting: FC = () => {
     if (room) {
       if (db) {
         writeRoom(db, { ...room, members: newMembers });
-        // if you wait "snapshot", List is blinked.
+        // if you wait "onSnapshot", List is blinked.
         setRoom({ ...room, members: newMembers });
+      }
+    }
+  };
+  const handleRandom = (newMembers: string[]) => {
+    if (room) {
+      if (db) {
+        writeRoom(db, { ...room, members: newMembers });
       }
     }
   };
@@ -125,6 +132,7 @@ const MobSetting: FC = () => {
           onKeyDown={handleKeyDown}
           onDelete={handleDelete}
           onDrop={handleDrop}
+          onRandom={handleRandom}
         />
       </div>
     </div>
