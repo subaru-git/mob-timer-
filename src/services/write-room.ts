@@ -2,7 +2,12 @@ import firebase from 'firebase/app';
 import { Room } from 'services/models/room';
 import { collectionName } from 'services/constants';
 
-const writeRoom = async (db: firebase.firestore.Firestore, room: Room) => {
+const writeRoom = async (
+  db: firebase.firestore.Firestore | null,
+  room: Room,
+) => {
+  if (!db) return;
+
   const batch = db.batch();
   const doc = await db
     .collection(collectionName.rooms)

@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import { createContext } from 'react';
 
-import { Room } from 'services/models/room';
+import { Room, initialRoom } from 'services/models/room';
 
 export const FirebaseContext = createContext<{
   db: firebase.firestore.Firestore | null;
@@ -10,11 +10,12 @@ export const FirebaseContext = createContext<{
 });
 
 export const RoomContext = createContext<{
-  room: Room | null;
+  room: Room;
   setRoom: (room: Room) => void;
   loading: boolean;
 }>({
-  room: null,
-  setRoom: () => undefined,
+  room: initialRoom,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setRoom: () => () => {},
   loading: false,
 });

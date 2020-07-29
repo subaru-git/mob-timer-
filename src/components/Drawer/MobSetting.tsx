@@ -43,52 +43,34 @@ const MobSetting: FC = () => {
   const breaks = room ? room.breaks : 15;
   const breaksCount = room ? room.breaksCount : 5;
   const handleTimerChange = (value: number) => {
-    if (room) {
-      if (db) writeRoom(db, { ...room, timer: value });
-    }
+    writeRoom(db, { ...room, timer: value });
   };
   const handleBreaksChange = (value: number) => {
-    if (room) {
-      if (db) writeRoom(db, { ...room, breaks: value });
-    }
+    writeRoom(db, { ...room, breaks: value });
   };
   const handleBreaksCountChange = (e: any) => {
-    if (room) {
-      if (db) writeRoom(db, { ...room, breaksCount: e.target.value });
-    }
+    writeRoom(db, { ...room, breaksCount: e.target.value });
   };
   const handleKeyDown = (e: any) => {
     if (e.keyCode === 13) {
       const nm = e.target.value;
       members.push(nm);
-      if (room) {
-        if (db) writeRoom(db, { ...room, members });
-      }
+      writeRoom(db, { ...room, members });
       e.target.value = '';
     }
   };
   const handleDelete = (i: number) => {
     members.splice(i, 1);
-    if (room) {
-      if (db) writeRoom(db, { ...room, members });
-    }
+    writeRoom(db, { ...room, members });
   };
   const handleDrop = (removedIndex: number, addedIndex: number) => {
     const newMembers = ArrayMove(members, removedIndex, addedIndex);
-    if (room) {
-      if (db) {
-        writeRoom(db, { ...room, members: newMembers });
-        // if you wait "onSnapshot", List is blinked.
-        setRoom({ ...room, members: newMembers });
-      }
-    }
+    writeRoom(db, { ...room, members: newMembers });
+    // if you wait "onSnapshot", List is blinked.
+    setRoom({ ...room, members: newMembers });
   };
   const handleRandom = (newMembers: string[]) => {
-    if (room) {
-      if (db) {
-        writeRoom(db, { ...room, members: newMembers });
-      }
-    }
+    writeRoom(db, { ...room, members: newMembers });
   };
 
   return (

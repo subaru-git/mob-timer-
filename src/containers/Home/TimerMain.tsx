@@ -56,20 +56,18 @@ const ScrumTimerMain: FC = () => {
   const driver = room.members[room.current];
   const isBreak = room.count === room.breaksCount;
   const handleFinish = () => {
-    if (db) {
-      let newCurrent = room.current;
-      let newCount = 0;
-      if (!isBreak) {
-        newCurrent = (room.current + 1) % room.members.length;
-        newCount = room.count + 1;
-      }
-      writeRoom(db, {
-        ...room,
-        count: newCount,
-        current: newCurrent,
-        timerEnd: null,
-      });
+    let newCurrent = room.current;
+    let newCount = 0;
+    if (!isBreak) {
+      newCurrent = (room.current + 1) % room.members.length;
+      newCount = room.count + 1;
     }
+    writeRoom(db, {
+      ...room,
+      count: newCount,
+      current: newCurrent,
+      timerEnd: null,
+    });
   };
   const handleStart = () => {
     let time = room.timer;
@@ -79,20 +77,19 @@ const ScrumTimerMain: FC = () => {
         .add(time, 'm')
         .toDate(),
     );
-    if (db) writeRoom(db, { ...room, timerEnd });
+    writeRoom(db, { ...room, timerEnd });
   };
 
   const handleStop = () => {
-    if (db) writeRoom(db, { ...room, timerEnd: null });
+    writeRoom(db, { ...room, timerEnd: null });
   };
 
   const handleSkip = () => {
-    if (db)
-      writeRoom(db, {
-        ...room,
-        timerEnd: null,
-        current: (room.current + 1) % room.members.length,
-      });
+    writeRoom(db, {
+      ...room,
+      timerEnd: null,
+      current: (room.current + 1) % room.members.length,
+    });
   };
 
   return (

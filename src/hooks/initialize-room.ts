@@ -21,13 +21,11 @@ const initializeRoom = (
           ...initialRoom,
           id: name,
         };
-        console.log(`create room : ${name}`);
         createRoom(db, room);
       }
       setRoom(snap.data() as Room);
       query.onSnapshot(snapshot => {
         setRoom(snapshot.data() as Room);
-        console.log(`onSnapshot!!!`);
       });
     } catch (e) {
       console.log(`firebase error`);
