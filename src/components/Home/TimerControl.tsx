@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import StopIcon from '@material-ui/icons/Stop';
+import RedoIcon from '@material-ui/icons/Redo';
 import { isNull } from 'utils/util';
 
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -109,7 +112,9 @@ const TimerControl: FC<{
       <div className={classes.buttons}>
         <Button
           className={classes.button}
-          variant="contained"
+          variant="outlined"
+          color="primary"
+          endIcon={<PlayCircleOutlineIcon />}
           onClick={() => {
             onStart();
           }}
@@ -118,7 +123,8 @@ const TimerControl: FC<{
         </Button>
         <Button
           className={classes.button}
-          variant="contained"
+          variant="outlined"
+          endIcon={<StopIcon />}
           onClick={() => {
             onStop();
           }}
@@ -127,7 +133,8 @@ const TimerControl: FC<{
         </Button>
         <Button
           className={classes.button}
-          variant="contained"
+          variant="outlined"
+          endIcon={<RedoIcon />}
           onClick={() => {
             onSkip();
           }}

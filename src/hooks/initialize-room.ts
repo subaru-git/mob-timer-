@@ -5,7 +5,7 @@ import { collectionName } from 'services/constants';
 import { createRoom } from 'services/write-room';
 
 const initializeRoom = (
-  db: firebase.firestore.Firestore,
+  db: firebase.firestore.Firestore | null,
   name: string,
   setRoom: (room: Room) => void,
   setLoading: (loading: boolean) => void,
@@ -23,14 +23,13 @@ const initializeRoom = (
         };
         createRoom(db, room);
       }
-      setRoom(snap.data() as Room);
       query.onSnapshot(snapshot => {
         setRoom(snapshot.data() as Room);
+        setLoading(false);
       });
     } catch (e) {
       console.log(`firebase error`);
     }
-    setLoading(false);
   };
   load();
 };

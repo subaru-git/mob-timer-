@@ -13,7 +13,7 @@ const RoomApp: FC = ({ children }) => {
   const [room, setRoom] = useState(initialRoom);
   const { name } = useParams();
   useEffect(() => {
-    if (db) initializeRoom(db, name, setRoom, setLoading);
+    initializeRoom(db, name, setRoom, setLoading);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
