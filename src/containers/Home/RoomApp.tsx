@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 const RoomApp: FC = ({ children }) => {
   const { db } = useContext(FirebaseContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [room, setRoom] = useState(initialRoom);
   const { name } = useParams();
   useEffect(() => {

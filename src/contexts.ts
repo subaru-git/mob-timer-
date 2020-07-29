@@ -17,5 +17,5 @@ export const RoomContext = createContext<{
   room: initialRoom,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setRoom: () => () => {},
-  loading: false,
+  loading: true,
 });

@@ -45,8 +45,9 @@ const useStyles = makeStyles(() =>
 const TimerMain: FC = () => {
   const classes = useStyles();
   const { db } = useContext(FirebaseContext);
-  const { room } = useContext(RoomContext);
-  if (!room) {
+  const { room, loading } = useContext(RoomContext);
+  console.log(`TimerMain loading : ${loading}`);
+  if (loading) {
     return (
       <div className={classes.loadingMain}>
         <CircularProgress className={classes.loading} />

@@ -33,7 +33,7 @@ const TimerDrawer: FC<{
   open: boolean;
 }> = ({ handleDrawerClose, open }) => {
   const classes = useStyles();
-  const { room, loading } = useContext(RoomContext);
+  const { loading } = useContext(RoomContext);
 
   return (
     <div className={classes.root}>
@@ -45,7 +45,7 @@ const TimerDrawer: FC<{
       >
         <DrawerHeader handleClose={handleDrawerClose} />
         <Divider />
-        {loading || !room ? (
+        {loading ? (
           <CircularProgress className={classes.loading} />
         ) : (
           <div>
