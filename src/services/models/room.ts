@@ -21,7 +21,7 @@ export const initialRoom: Room = {
   breaksCount: 5,
   count: 0,
   current: 0,
-  members: [],
+  members: ['start  by', 'the left top button'],
   timerEnd: null,
   createdAt: null,
   updatedAt: null,

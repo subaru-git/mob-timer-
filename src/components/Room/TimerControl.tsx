@@ -66,7 +66,9 @@ const TimerControl: FC<{
             className={classes.driveIcon}
             style={{ fontSize: 40 }}
           />
-          <Typography variant="h3">break</Typography>
+          <Typography variant="h3" noWrap>
+            break
+          </Typography>
         </>
       ) : (
         <>
@@ -74,7 +76,9 @@ const TimerControl: FC<{
             className={classes.driveIcon}
             style={{ fontSize: 40 }}
           />
-          <Typography variant="h3">{driver}</Typography>
+          <Typography variant="h3" noWrap>
+            {driver}
+          </Typography>
         </>
       )}
     </div>
@@ -84,7 +88,6 @@ const TimerControl: FC<{
         end={end.toDate()}
         onFinish={() => {
           onFinish();
-          console.log(`timer finish: notification: ${notification}`);
           setNotification(true);
         }}
       />
@@ -95,7 +98,9 @@ const TimerControl: FC<{
               className={classes.driveIcon}
               style={{ fontSize: 25 }}
             />
-            <Typography variant="h3">break</Typography>
+            <Typography variant="h3" noWrap>
+              break
+            </Typography>
           </>
         ) : (
           <>
@@ -103,7 +108,9 @@ const TimerControl: FC<{
               className={classes.driveIcon}
               style={{ fontSize: 25 }}
             />
-            <Typography variant="h3">{driver}</Typography>
+            <Typography variant="h3" noWrap>
+              {driver}
+            </Typography>
           </>
         )}
       </div>
