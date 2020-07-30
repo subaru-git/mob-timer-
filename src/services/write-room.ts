@@ -26,7 +26,10 @@ const createRoom = async (db: firebase.firestore.Firestore, room: Room) => {
   await db
     .collection(collectionName.rooms)
     .doc(room.id)
-    .set(room);
+    .set({
+      ...room,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
 };
 
 export { writeRoom, createRoom };
