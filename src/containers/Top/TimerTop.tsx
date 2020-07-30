@@ -13,19 +13,23 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
+      flexDirection: 'row',
       justifyContent: 'center',
-      flexWrap: 'nowrap',
+      alignContent: 'center',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      height: '80vh',
     },
     logo: {
-      marginRight: '20px',
+      margin: '20px',
     },
     sharedLink: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
+      alignContent: 'center',
       flexWrap: 'wrap',
       alignItems: 'center',
-      height: '100vh',
     },
   }),
 );
@@ -38,7 +42,7 @@ const TimerTop: FC = () => {
   return (
     <>
       <TimerAppBar menu={false} />
-      <div className={classes.sharedLink}>
+      <div className={classes.root}>
         <img className={classes.logo} src={Logo} alt="logo" />
         <div className={classes.sharedLink}>
           <Typography variant="h4">
