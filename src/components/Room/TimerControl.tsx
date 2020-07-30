@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import firebase from 'firebase/app';
 
 import { CountdownTimer } from 'components/common/CountdownTimer';
+import { TimerNotification } from 'components/Room/TimerNotification';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
@@ -56,6 +57,7 @@ const TimerControl: FC<{
   isBreak: boolean;
 }> = ({ end, driver, onFinish, onStart, onStop, onSkip, isBreak }) => {
   const classes = useStyles();
+  const [notification, setNotification] = useState(false);
   const maintimer = isNull(end) ? (
     <div className={classes.stop}>
       {isBreak ? (
@@ -82,6 +84,8 @@ const TimerControl: FC<{
         end={end.toDate()}
         onFinish={() => {
           onFinish();
+          console.log(`timer finish: notification: ${notification}`);
+          setNotification(true);
         }}
       />
       <div className={classes.playingDriver}>
@@ -123,17 +127,19 @@ const TimerControl: FC<{
             Start
           </Button>
         ) : (
-          <Button
-            className={classes.button}
-            variant="outlined"
-            color="primary"
-            endIcon={<StopIcon />}
-            onClick={() => {
-              onStop();
-            }}
-          >
-            Stop
-          </Button>
+          <>
+            <Button
+              className={classes.button}
+              variant="outlined"
+              color="primary"
+              endIcon={<StopIcon />}
+              onClick={() => {
+                onStop();
+              }}
+            >
+              Stop
+            </Button>
+          </>
         )}
         <Button
           className={classes.button}
@@ -146,6 +152,12 @@ const TimerControl: FC<{
           Skip
         </Button>
       </div>
+      <TimerNotification
+        show={notification}
+        onClose={() => {
+          setNotification(false);
+        }}
+      />
     </div>
   );
 };
