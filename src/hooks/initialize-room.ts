@@ -24,8 +24,10 @@ const initializeRoom = (
         createRoom(db, room);
       }
       query.onSnapshot(snapshot => {
-        setRoom(snapshot.data() as Room);
-        setLoading(false);
+        if (snapshot.exists) {
+          setRoom(snapshot.data() as Room);
+          setLoading(false);
+        }
       });
     } catch (e) {
       console.log(`firebase error`);
