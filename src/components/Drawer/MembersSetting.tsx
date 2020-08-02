@@ -68,7 +68,8 @@ const MembersSetting: FC<{
             }}
           >
             {members.map((m, i) => (
-              <Draggable key={m}>
+              // eslint-disable-next-line react/no-array-index-key
+              <Draggable key={`${m}-${i}`}>
                 <ListItem className="drag-handle">
                   <ListItemText primary={m} />
                   <ListItemSecondaryAction>

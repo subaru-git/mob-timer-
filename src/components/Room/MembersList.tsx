@@ -27,7 +27,8 @@ const MembersList: FC<{ members: string[]; current: number }> = ({
   return (
     <List className={classes.list} component="nav" aria-label="contacts">
       {members.map((m: string, i: number) => (
-        <ListItem key={m}>
+        // eslint-disable-next-line react/no-array-index-key
+        <ListItem key={`${m}-${i}`}>
           {current === i && (
             <ListItemIcon>
               <DriveEtaIcon />
