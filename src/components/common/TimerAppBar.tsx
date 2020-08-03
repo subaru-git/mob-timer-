@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { FC, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -48,9 +48,15 @@ const TimerAppBar: FC<{
           ) : (
             <div />
           )}
-          <Typography variant="h6" className={classes.title}>
+          <Link
+            className={classes.title}
+            href="/"
+            color="inherit"
+            variant="h5"
+            underline="none"
+          >
             Mob Timer
-          </Typography>
+          </Link>
           {menu ? (
             <Tooltip
               title={tooltip}
