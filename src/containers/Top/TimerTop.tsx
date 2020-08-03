@@ -22,6 +22,7 @@ const useStyles = makeStyles(() =>
     },
     logo: {
       margin: '20px',
+      width: '150px',
     },
     sharedLink: {
       display: 'flex',
