@@ -6,6 +6,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { TimerAppBar } from 'components/common/TimerAppBar';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import { isValidRoomName } from 'utils/util';
 
 import Logo from '../../asset/mobtimer-logo.svg';
 
@@ -38,7 +39,9 @@ const useStyles = makeStyles(() =>
 const TimerTop: FC = () => {
   const classes = useStyles();
   const [name, setName] = useState('');
+  const [error, setError] = useState('');
   const history = useHistory();
+  const domain = 'http://i-do-not-get-domain.sorry/';
 
   return (
     <>
@@ -46,15 +49,19 @@ const TimerTop: FC = () => {
       <div className={classes.root}>
         <img className={classes.logo} src={Logo} alt="logo" />
         <div className={classes.sharedLink}>
-          <Typography variant="h4">
-            http://i-do-not-get-domain.sorry/
-          </Typography>
+          <Typography variant="h4">{domain}</Typography>
           <TextField
             value={name}
             label="create shared link"
-            helperText="your original room name"
+            helperText={error || 'your original room name'}
+            error={error !== ''}
             variant="filled"
             onChange={(e: any) => {
+              if (!isValidRoomName(domain, e.target.value)) {
+                setError('invalid room name');
+              } else {
+                setError('');
+              }
               setName(e.target.value);
             }}
           />
@@ -62,6 +69,7 @@ const TimerTop: FC = () => {
             onClick={() => {
               if (name !== '') history.push(`/${name}`);
             }}
+            disabled={name === '' || error !== ''}
           >
             <ArrowForwardIcon />
           </IconButton>

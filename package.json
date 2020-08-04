@@ -18,6 +18,7 @@
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.5",
+    "@types/valid-url": "^1.0.3",
     "array-move": "^3.0.0",
     "date-fns": "^2.8.1",
     "firebase": "^7.13.2",
@@ -33,7 +34,8 @@
     "react-scripts": "^3.4.0",
     "react-smooth-dnd": "^0.11.1",
     "react-web-notification": "^0.8.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "valid-url": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",

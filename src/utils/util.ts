@@ -1,3 +1,5 @@
+import validUrl from 'valid-url';
+
 const isNull = (t: any): t is null => t == null;
 
 const shuffle = ([...arr]) => {
@@ -12,4 +14,10 @@ const shuffle = ([...arr]) => {
   return ret;
 };
 
-export { isNull, shuffle };
+const isValidRoomName = (domain: string, name: string) => {
+  if (name.includes('/')) return false;
+
+  return validUrl.isWebUri(`${domain}${name}`);
+};
+
+export { isNull, shuffle, isValidRoomName };
