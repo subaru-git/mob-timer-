@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 
 import { TimerControl } from 'components/Room/TimerControl';
 import { MembersList } from 'components/Room/MembersList';
+import { SubTimer } from 'containers/Room/SubTimer';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
@@ -107,31 +108,34 @@ const TimerMain: FC = () => {
         color="secondary"
         value={(room.count * 100) / room.breaksCount}
       />
-      <div className={classes.appMain}>
-        <TimerControl
-          end={room.timerEnd}
-          driver={driver}
-          onFinish={handleFinish}
-          onStart={handleStart}
-          onStop={handleStop}
-          onSkip={handleSkip}
-          isBreak={isBreak}
-        />
-        <MembersList members={room.members} current={room.current} />
+      <div>
+        <div className={classes.appMain}>
+          <TimerControl
+            end={room.timerEnd}
+            driver={driver}
+            onFinish={handleFinish}
+            onStart={handleStart}
+            onStop={handleStop}
+            onSkip={handleSkip}
+            isBreak={isBreak}
+          />
+          <MembersList members={room.members} current={room.current} />
+        </div>
+        <div className={classes.reset}>
+          <Button
+            className={classes.resetButton}
+            variant="outlined"
+            color="secondary"
+            startIcon={<RotateLeftIcon />}
+            onClick={() => {
+              handleReset();
+            }}
+          >
+            Reset
+          </Button>
+        </div>
       </div>
-      <div className={classes.reset}>
-        <Button
-          className={classes.resetButton}
-          variant="outlined"
-          color="secondary"
-          startIcon={<RotateLeftIcon />}
-          onClick={() => {
-            handleReset();
-          }}
-        >
-          Reset
-        </Button>
-      </div>
+      <SubTimer />
     </>
   );
 };
