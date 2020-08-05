@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import firebase from 'firebase/app';
+import { Helmet } from 'react-helmet';
 
 import { CountdownTimer } from 'components/common/CountdownTimer';
 import { TimerNotification } from 'components/Room/TimerNotification';
@@ -69,6 +70,9 @@ const TimerControl: FC<{
           <Typography variant="h3" noWrap>
             break
           </Typography>
+          <Helmet>
+            <title>Mob Timer</title>
+          </Helmet>
         </>
       ) : (
         <>
@@ -79,6 +83,9 @@ const TimerControl: FC<{
           <Typography variant="h3" noWrap>
             {driver}
           </Typography>
+          <Helmet>
+            <title>Mob Timer</title>
+          </Helmet>
         </>
       )}
     </div>
