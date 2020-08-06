@@ -49,7 +49,7 @@ const MobSetting: FC = () => {
     writeRoom(db, { ...room, breaks: value });
   };
   const handleBreaksCountChange = (e: any) => {
-    writeRoom(db, { ...room, breaksCount: e.target.value });
+    writeRoom(db, { ...room, breaksCount: parseInt(e.target.value, 10) });
   };
   const handleKeyDown = (e: any) => {
     if (e.keyCode === 13) {
