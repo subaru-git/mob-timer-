@@ -40,7 +40,7 @@ const getSounds = (min: number, sec: number) => {
 };
 
 export const countSound = async (min: number, sec: number, start = false) => {
-  if (start && min !== 1) {
+  if (start) {
     playSound('./count-sound/start.mp3');
 
     return;

@@ -53,7 +53,7 @@ const SubTimer: FC = () => {
     const subTimerEnd = firebase.firestore.Timestamp.fromDate(
       moment()
         .add(time, 'm')
-        .add(1, 's')
+        .add(2, 's')
         .toDate(),
     );
     writeRoom(db, { ...room, subTimerEnd });
