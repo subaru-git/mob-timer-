@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Wave } from 'react-animated-text';
 import Countdown, { zeroPad } from 'react-countdown';
-import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -34,15 +33,16 @@ const CountdownTimer: FC<{
 
           return (
             <div className={classes.main}>
-              <Helmet>
-                <title>{text}</title>
-              </Helmet>
               <Wave text={text} speed={speed} />
             </div>
           );
         }}
         onComplete={() => {
           if (onFinish) onFinish();
+        }}
+        onTick={({ minutes, seconds }) => {
+          const text = `${zeroPad(minutes)} : ${zeroPad(seconds)}`;
+          document.title = text;
         }}
       />
     </div>
