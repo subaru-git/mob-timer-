@@ -65,7 +65,7 @@ const TimerControl: FC<{
         <>
           <LocalCafeIcon
             className={classes.driveIcon}
-            style={{ fontSize: 40 }}
+            style={{ fontSize: '3rem' }}
           />
           <Typography variant="h3" noWrap>
             break
@@ -78,7 +78,7 @@ const TimerControl: FC<{
         <>
           <DriveEtaIcon
             className={classes.driveIcon}
-            style={{ fontSize: 40 }}
+            style={{ fontSize: '3rem' }}
           />
           <Typography variant="h3" noWrap>
             {driver}
@@ -103,7 +103,7 @@ const TimerControl: FC<{
           <>
             <LocalCafeIcon
               className={classes.driveIcon}
-              style={{ fontSize: 25 }}
+              style={{ fontSize: '3rem' }}
             />
             <Typography variant="h3" noWrap>
               break
@@ -113,7 +113,7 @@ const TimerControl: FC<{
           <>
             <DriveEtaIcon
               className={classes.driveIcon}
-              style={{ fontSize: 25 }}
+              style={{ fontSize: '3rem' }}
             />
             <Typography variant="h3" noWrap>
               {driver}

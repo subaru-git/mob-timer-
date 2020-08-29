@@ -11,9 +11,6 @@ const useStyles = makeStyles(() =>
     main: {
       fontSize: 'calc(40px + 2vmin)',
     },
-    sub: {
-      fontSize: 'calc(15px + 2vmin)',
-    },
   }),
 );
 
