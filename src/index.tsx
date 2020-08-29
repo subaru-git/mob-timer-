@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { FC, useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import firebase from 'firebase/app';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { TimerTop } from 'containers/Top/TimerTop';
 import { TimerRoom } from './containers/Room/TimerRoom';
@@ -13,15 +16,37 @@ import './index.css';
 
 firebase.initializeApp(firebaseConfig);
 
+const App: FC = ({ children }) => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const theme = useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
+  );
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
+};
+
 ReactDOM.render(
-  <FirebaseApp>
-    <Router>
-      <Switch>
-        <Route path="/:name" component={TimerRoom} />
-        <Route path="/" component={TimerTop} />
-      </Switch>
-    </Router>
-  </FirebaseApp>,
+  <App>
+    <FirebaseApp>
+      <Router>
+        <Switch>
+          <Route path="/:name" component={TimerRoom} />
+          <Route path="/" component={TimerTop} />
+        </Switch>
+      </Router>
+    </FirebaseApp>
+  </App>,
   document.getElementById('root'),
 );
 
