@@ -39,6 +39,7 @@ const CountdownTimer: FC<{
         }}
         onComplete={() => {
           if (onFinish) onFinish();
+          document.title = 'Mob Timer';
         }}
         onTick={({ minutes, seconds }) => {
           const text = `${zeroPad(minutes)} : ${zeroPad(seconds)}`;
