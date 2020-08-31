@@ -13,6 +13,8 @@ const useStyles = makeStyles(() =>
       flexDirection: 'column',
     },
     mainTopics: {
+      padding: '0 30px',
+      margin: 'auto',
       flex: '0 0 80px',
     },
     input: {
