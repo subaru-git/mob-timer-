@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import { TimerControl } from 'components/Room/TimerControl';
 import { MembersList } from 'components/Room/MembersList';
 import { SubTimer } from 'containers/Room/SubTimer';
+import { PurposeView } from 'containers/Room/PurposeView';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
@@ -100,6 +101,13 @@ const TimerMain: FC = () => {
       count: 0,
     });
   };
+  const handleKeyDown = (e: any) => {
+    if (e.keyCode === 13) {
+      const topics = e.target.value;
+      writeRoom(db, { ...room, topics });
+      e.target.value = '';
+    }
+  };
 
   return (
     <>
@@ -135,7 +143,12 @@ const TimerMain: FC = () => {
           </Button>
         </div>
       </div>
-      <SubTimer />
+      <div>
+        <SubTimer />
+      </div>
+      <div>
+        <PurposeView topics={room.topics} onKeyDown={handleKeyDown} />
+      </div>
     </>
   );
 };

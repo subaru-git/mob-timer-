@@ -9,6 +9,7 @@ export type Room = {
   count: number;
   current: number;
   members: string[];
+  topics: string;
   timerEnd: firestore.Timestamp | null;
   subTimerEnd: firestore.Timestamp | null;
   createdAt: firestore.Timestamp | null;
@@ -23,6 +24,7 @@ export const initialRoom: Room = {
   count: 0,
   current: 0,
   members: ['start  by', 'the left top button'],
+  topics: '',
   timerEnd: null,
   subTimerEnd: null,
   createdAt: null,
