@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import blue from '@material-ui/core/colors/blue';
 
 import { TimerTop } from 'containers/Top/TimerTop';
 import { TimerRoom } from './containers/Room/TimerRoom';
@@ -22,6 +23,7 @@ const App: FC = ({ children }) => {
     () =>
       createMuiTheme({
         palette: {
+          primary: blue,
           type: prefersDarkMode ? 'dark' : 'light',
         },
       }),
