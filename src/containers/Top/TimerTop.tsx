@@ -41,7 +41,7 @@ const TimerTop: FC = () => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const history = useHistory();
-  const domain = 'http://i-do-not-get-domain.sorry/';
+  const domain = 'https://mobtimer.space/';
 
   return (
     <>
