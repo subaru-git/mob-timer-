@@ -21,6 +21,16 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    billingBase: {
+      height: '64px',
+    },
+    billing: {
+      transform: 'scale(1.0)',
+      transformOrigin: '0 0',
+      paddingTop: '2px',
+      height: '80px',
+      marginTop: '-20px',
+    },
   }),
 );
 
@@ -58,22 +68,35 @@ const TimerAppBar: FC<{
             Mob Timer
           </Link>
           {menu ? (
-            <Tooltip
-              title={tooltip}
-              onClose={e => {
-                setTooltip('');
-              }}
-            >
-              <CopyToClipboard text={window.location.href}>
-                <IconButton
-                  onClick={() => {
-                    setTooltip('URL copied!!');
-                  }}
-                >
-                  <PersonAddIcon color="inherit" />
-                </IconButton>
-              </CopyToClipboard>
-            </Tooltip>
+            <>
+              <div className={classes.billingBase}>
+                <iframe
+                  className={classes.billing}
+                  title="plog"
+                  src="https://widget.plog.cash"
+                  data-plog
+                  data-id="cyDeevY8a7z46FVDJx9M"
+                  frameBorder={0}
+                  scrolling="no"
+                />
+              </div>
+              <Tooltip
+                title={tooltip}
+                onClose={e => {
+                  setTooltip('');
+                }}
+              >
+                <CopyToClipboard text={window.location.href}>
+                  <IconButton
+                    onClick={() => {
+                      setTooltip('URL copied!!');
+                    }}
+                  >
+                    <PersonAddIcon color="inherit" />
+                  </IconButton>
+                </CopyToClipboard>
+              </Tooltip>
+            </>
           ) : (
             <div />
           )}
